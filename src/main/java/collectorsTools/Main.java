@@ -9,6 +9,8 @@ public class Main {
 
         CommandReader commandReader = new CommandReader();
         commandReader.readAndExecute();
+
+        System.out.println("Siema wariat");
     }
 
 }
