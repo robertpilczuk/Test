@@ -6,8 +6,8 @@ import java.time.format.DateTimeFormatter;
 public class Declaration {
     @Override
     public String toString() {
-        return "\rData: " + declarationDate + "\r kwota: " +
-                declarationValue + "zł" + "\r nr sprawy: " +
+        return declarationDate + "\r kwota: " +
+                declarationValue + "pln" + "\r nr sprawy: " +
                 declarationCaseNumber +"\n" ;
     }
 

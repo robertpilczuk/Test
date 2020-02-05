@@ -27,7 +27,7 @@ public class CommandReader {
         COMMANDS.put(9, "Wyjście");
     }
 
-    public boolean readAndExecute() {
+    public void readAndExecute() {
         showMenu();
         int cmd = scanner.nextInt();
         switch (cmd) {
@@ -53,11 +53,10 @@ public class CommandReader {
                 fileEditor();
                 break;
             case 9:
-                return false;
+                return;
             default:
                 System.out.println("Nie ma takiej opcji!!!" + cmd);
         }
-        return true;
     }
 
     private void fileEditor() {
@@ -78,9 +77,11 @@ public class CommandReader {
         int numOfDaysBetween = getDatesBetween(beginDecDate, endDecDate).size();
         for (int i = 0; i < numOfDaysBetween; i++) {
             LocalDate date = LocalDate.from(beginDecDate).plusDays(i);
-            Optional<Declaration> optionalDeclaration = dm.retrieveByDate(date);
-            if (optionalDeclaration.isPresent()) {
-                Declaration declaration = optionalDeclaration.get();
+            Declaration optionalDeclaration = (Declaration) dm.retrieveByDate(date);
+
+//            Optional<Declaration> optionalDeclaration = dm.retrieveByDate(date);
+            if (optionalDeclaration != null) {
+                int declaration = optionalDeclaration.getDeclarationCaseNumber();
                 System.out.println(declaration);
             }
         }
@@ -137,7 +138,7 @@ public class CommandReader {
         int numOfDaysBetween = getDatesBetween(beginDecDate, endDecDate).size();
         for (int i = 0; i < numOfDaysBetween; i++) {
             LocalDate date = LocalDate.from(beginDecDate).plusDays(i);
-            System.out.println(dm.retrieveByDate(date));
+            dm.retrieveByDate(date);
             readAndExecute();
         }
     }
